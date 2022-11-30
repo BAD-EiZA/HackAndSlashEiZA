@@ -6,6 +6,7 @@ using HNS.FSM.StateReferences;
 using HNS.SubState.IdleState;
 using HNS.SubState.WalkState;
 using HNS.Data.PlayerData;
+using HNS.Input.System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,6 +27,10 @@ public class PlayerController : MonoBehaviour
     {
         get; private set;
     }
+    public PlayerInputHandler PlayerInputs
+    {
+        get; private set;
+    }
     #endregion
 
     [SerializeField] private PlayerData playerData;
@@ -38,6 +43,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         Anim = GetComponent<Animator>();
+        PlayerInputs = GetComponent<PlayerInputHandler>();
         StateMachines.Initialize(IdleStates);
     }
     private void Update()

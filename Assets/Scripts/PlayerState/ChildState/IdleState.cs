@@ -13,6 +13,35 @@ namespace HNS.SubState.IdleState
         public IdleState(PlayerController playerController, StateMachine stateMachine, PlayerData playerData, string animBoolName) : base(playerController, stateMachine, playerData, animBoolName)
         {
         }
+
+        public override void CheckerState()
+        {
+            base.CheckerState();
+        }
+
+        public override void EnterState()
+        {
+            base.EnterState();
+        }
+
+        public override void ExitState()
+        {
+            base.ExitState();
+        }
+
+        public override void LogicStateUpdate()
+        {
+            base.LogicStateUpdate();
+            if(Input.x != 0)
+            {
+                _stateMachine.ChangeState(_playerController.WalkStates);
+            }
+        }
+
+        public override void PhysicsStateUpdate()
+        {
+            base.PhysicsStateUpdate();
+        }
     }
 }
 
