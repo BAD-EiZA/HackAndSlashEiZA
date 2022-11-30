@@ -1,22 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HNS.FSM.StateReferences;
 
-public class StateMachine
+namespace HNS.FSM
 {
-    public State CurrentState
+    public class StateMachine
     {
-        get; private set; 
-    }
-    public void Initialize(State startingState)
-    {
-        CurrentState = startingState;
-        CurrentState.EnterState();
-    }
-    public void ChangeState(State upcomingState)
-    {
-        CurrentState.ExitState();
-        CurrentState = upcomingState;
-        CurrentState.EnterState();
+        public State CurrentState
+        {
+            get; private set;
+        }
+        public void Initialize(State startingState)
+        {
+            CurrentState = startingState;
+            CurrentState.EnterState();
+        }
+        public void ChangeState(State upcomingState)
+        {
+            CurrentState.ExitState();
+            CurrentState = upcomingState;
+            CurrentState.EnterState();
+        }
     }
 }
+
