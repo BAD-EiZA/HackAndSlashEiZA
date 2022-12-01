@@ -31,6 +31,10 @@ public class PlayerController : MonoBehaviour
     {
         get; private set;
     }
+    public Rigidbody RB
+    {
+        get; private set;
+    }
     #endregion
 
     [SerializeField] private PlayerData playerData;
@@ -43,15 +47,17 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         Anim = GetComponent<Animator>();
+        RB = GetComponent<Rigidbody>();
         PlayerInputs = GetComponent<PlayerInputHandler>();
         StateMachines.Initialize(IdleStates);
     }
     private void Update()
     {
-        StateMachines.CurrentState.LogicStateUpdate();
+        
     }
     private void FixedUpdate()
     {
-        StateMachines.CurrentState.PhysicsStateUpdate();
+        StateMachines.CurrentState.LogicStateUpdate();
+        //StateMachines.CurrentState.PhysicsStateUpdate();
     }
 }

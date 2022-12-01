@@ -35,6 +35,7 @@ namespace HNS.SubState.IdleState
             if(Input.x != 0)
             {
                 _stateMachine.ChangeState(_playerController.WalkStates);
+                Debug.Log("Walk State");
             }
         }
 
