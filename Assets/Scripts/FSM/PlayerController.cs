@@ -15,6 +15,10 @@ public class PlayerController : MonoBehaviour
     {
         get; private set; 
     }
+    public Transform MainCameraTransform
+    {
+        get; private set;
+    }
     public StateMachine StateMachines
     {
         get; private set;
@@ -36,7 +40,6 @@ public class PlayerController : MonoBehaviour
         get; private set;
     }
     #endregion
-
     [SerializeField] private PlayerData playerData;
     private void Awake()
     {
@@ -59,5 +62,13 @@ public class PlayerController : MonoBehaviour
     {
         StateMachines.CurrentState.LogicStateUpdate();
         //StateMachines.CurrentState.PhysicsStateUpdate();
+    }
+    public void ResetVelocity()
+    {
+        RB.velocity = Vector3.zero;
+    }
+    public Vector3 MoveDirection()
+    {
+        return new Vector3(PlayerInputs.MovementInput.x, 0f, PlayerInputs.MovementInput.y);
     }
 }

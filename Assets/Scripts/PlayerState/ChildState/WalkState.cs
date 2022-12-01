@@ -32,11 +32,12 @@ namespace HNS.SubState.WalkState
         public override void LogicStateUpdate()
         {
             base.LogicStateUpdate();
-            _playerController.RB.AddForce(_playerData.GetMovementSpeed() * MoveDirection() - GetCurrentHorizontalVelocity(), ForceMode.VelocityChange);
             if(Input.x == 0)
             {
                 _stateMachine.ChangeState(_playerController.IdleStates);
+                Debug.Log("Idle State");
             }
+            _playerController.RB.AddForce(_playerData.GetMovementSpeed() * _playerController.MoveDirection() - GetCurrentHorizontalVelocity(), ForceMode.VelocityChange);
         }
 
         public override void PhysicsStateUpdate()

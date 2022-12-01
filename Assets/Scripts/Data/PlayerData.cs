@@ -14,6 +14,10 @@ namespace HNS.Data.PlayerData
         {
             return BaseSpeed * SpeedModifier;
         }
+        public float ResetSpeedModifier()
+        {
+            return SpeedModifier = 0;
+        }
     }
 }
 
