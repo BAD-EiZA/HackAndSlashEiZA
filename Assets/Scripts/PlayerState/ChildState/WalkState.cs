@@ -47,7 +47,7 @@ namespace HNS.SubState.WalkState
             //_playerData.SetSpeedModifier(1);
             float targetMovementRotation = Rotate(_playerController.MoveDirection());
             Vector3 targerRotation = GetTargetRotation(targetMovementRotation);
-            _playerController.RB.AddForce(targerRotation * _playerData.GetMovementSpeed() - _playerController.GetCurrentHorizontalVelocity(), ForceMode.VelocityChange);
+            _playerController.RB.AddForce(targerRotation * _playerData.GetMovementSpeed() - _playerController.GetCurrentHorizontalVelocity(), ForceMode.Force);
         }
         public override void PhysicsStateUpdate()
         {
