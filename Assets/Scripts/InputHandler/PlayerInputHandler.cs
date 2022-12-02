@@ -15,6 +15,7 @@ namespace HNS.Input.System
         public void MoveInput(InputAction.CallbackContext context)
         {
             MovementInput = context.ReadValue<Vector2>();
+            Debug.Log(MovementInput);
         }
         public void JumpInput(InputAction.CallbackContext context)
         {

@@ -22,8 +22,8 @@ namespace HNS.SubState.IdleState
         public override void EnterState()
         {
             base.EnterState();
-            //_playerData.ResetSpeedModifier();
-            _playerController.ResetVelocity();
+            //_playerData.SetSpeedModifier(0);
+            //_playerController.ResetVelocity();
         }
 
         public override void ExitState()
@@ -37,6 +37,7 @@ namespace HNS.SubState.IdleState
             if(Input.x != 0 || Input.y != 0)
             {
                 _stateMachine.ChangeState(_playerController.WalkStates);
+                _playerController.Anim.SetFloat("Speed", 1f);
                 Debug.Log("Walk State");
             }
         }

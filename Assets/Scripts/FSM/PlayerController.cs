@@ -15,10 +15,10 @@ public class PlayerController : MonoBehaviour
     {
         get; private set; 
     }
-    public Transform MainCameraTransform
-    {
-        get; private set;
-    }
+    //public Transform MainCameraTransform
+    //{
+    //    get; private set;
+    //}
     public StateMachine StateMachines
     {
         get; private set;
@@ -39,16 +39,22 @@ public class PlayerController : MonoBehaviour
     {
         get; private set;
     }
+    public Transform MainCameraTransform
+    {
+        get; private set;
+    }
     #endregion
     [SerializeField] private PlayerData playerData;
     private void Awake()
     {
+        MainCameraTransform = Camera.main.transform;
         StateMachines = new StateMachine();
         IdleStates = new IdleState(this, StateMachines, playerData, "Idle");
         WalkStates = new WalkState(this, StateMachines, playerData, "Walk");
     }
     private void Start()
     {
+        
         Anim = GetComponent<Animator>();
         RB = GetComponent<Rigidbody>();
         PlayerInputs = GetComponent<PlayerInputHandler>();
@@ -70,5 +76,12 @@ public class PlayerController : MonoBehaviour
     public Vector3 MoveDirection()
     {
         return new Vector3(PlayerInputs.MovementInput.x, 0f, PlayerInputs.MovementInput.y);
+    }
+    public Vector3 GetCurrentHorizontalVelocity()
+    {
+        Vector3 currentVelocity;
+        currentVelocity = RB.velocity;
+        currentVelocity.y = 0f;
+        return currentVelocity;
     }
 }
