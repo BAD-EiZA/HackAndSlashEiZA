@@ -13,13 +13,17 @@ public class PlayerController : MonoBehaviour
     #region Properties
     public Animator Anim
     {
-        get; private set; 
+        get; private set;
     }
     //public Transform MainCameraTransform
     //{
     //    get; private set;
     //}
     public StateMachine StateMachines
+    {
+        get; private set;
+    }
+    public DashState DashStates
     {
         get; private set;
     }
@@ -45,12 +49,14 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
     [SerializeField] private PlayerData playerData;
+    [SerializeField] private DashData dashData;
     private void Awake()
     {
         MainCameraTransform = Camera.main.transform;
         StateMachines = new StateMachine();
         IdleStates = new IdleState(this, StateMachines, playerData, "Idle");
         WalkStates = new WalkState(this, StateMachines, playerData, "Walk");
+        DashStates = new DashState(this, StateMachines, playerData, "Dash", dashData);
     }
     private void Start()
     {
@@ -84,4 +90,5 @@ public class PlayerController : MonoBehaviour
         currentVelocity.y = 0f;
         return currentVelocity;
     }
+
 }

@@ -40,6 +40,11 @@ namespace HNS.SubState.IdleState
                 _playerController.Anim.SetFloat("Speed", 1f);
                 Debug.Log("Walk State");
             }
+            if (JumpInput && !JumpInputStop)
+            {
+                _stateMachine.ChangeState(_playerController.DashStates);
+            }
+            
         }
 
         public override void PhysicsStateUpdate()
