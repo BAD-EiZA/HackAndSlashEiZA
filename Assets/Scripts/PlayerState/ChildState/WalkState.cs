@@ -40,8 +40,10 @@ namespace HNS.SubState.WalkState
                 _playerController.Anim.SetFloat("Speed", 0f);
                 Debug.Log("Idle State");
             }
-            //_playerData.SetSpeedModifier(1);
+            
             AddForceMovement(_playerData.GetMovementSpeed());
+            //_playerData.SetSpeedModifier(1);
+
 
         }
         public override void PhysicsStateUpdate()

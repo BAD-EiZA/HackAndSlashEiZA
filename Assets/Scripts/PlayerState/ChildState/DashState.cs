@@ -8,11 +8,20 @@ using UnityEngine;
 public class DashState : ParentGroundedState
 {
     protected DashData dashData;
+    private float startTime;
+    private int consecutiveDashUsed;
+    public bool CanDash { get; private set; }
+    private float lastDashTime;
     public DashState(PlayerController playerController, StateMachine stateMachine, PlayerData playerData, string animBoolName, DashData dashData) : base(playerController, stateMachine, playerData, animBoolName)
     {
         this.dashData = dashData;
     }
-
+    public bool CheckerCanDash()
+    {
+        return CanDash && Time.time >= lastDashTime + dashData.DashCooldown;
+    }
+ 
+    public void ResetCanDash() => CanDash = true;
     public override void CheckerState()
     {
         base.CheckerState();
@@ -21,8 +30,11 @@ public class DashState : ParentGroundedState
     public override void EnterState()
     {
         base.EnterState();
-        AddForceMovement(dashData.GetMovementSpeed());
+        CanDash = false;
+        _playerController.PlayerInputs.UseDashInput();
         AddForceOnDash();
+        AddForceMovement(dashData.GetMovementSpeed());
+        
     }
 
     public override void ExitState()
@@ -36,6 +48,10 @@ public class DashState : ParentGroundedState
         if(Input == Vector2.zero)
         {
             _stateMachine.ChangeState(_playerController.IdleStates);
+        }
+        if(Input != Vector2.zero)
+        {
+            _stateMachine.ChangeState(_playerController.WalkStates);
         }
     }
 

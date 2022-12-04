@@ -13,6 +13,7 @@ namespace HNS.Data.PlayerData
         [SerializeField] public Vector3 timeTargetRotation;
         [SerializeField] public Vector3 dampedTargetRotationCurrentVelocity;
         [SerializeField] public Vector3 dampedTargetRotationPassedTime;
+        [SerializeField] public LayerMask GroundLayer;
 
         public Vector3 GetCurrentTargetRotation() => currentTargetRotation;
         public Vector3 GetTimeTargetRotation() => timeTargetRotation;

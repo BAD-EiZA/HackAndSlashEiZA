@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     #endregion
     [SerializeField] private PlayerData playerData;
     [SerializeField] private DashData dashData;
+    [SerializeField] public Transform GroundCheck;
     private void Awake()
     {
         MainCameraTransform = Camera.main.transform;
@@ -78,6 +79,14 @@ public class PlayerController : MonoBehaviour
     public void ResetVelocity()
     {
         RB.velocity = Vector3.zero;
+    }
+    public IEnumerator DelayDash()
+    {
+        yield return new WaitForSeconds(dashData.DashLimitCooldown);
+    }
+    public void StartDelayDash()
+    {
+        StartCoroutine(DelayDash());
     }
     public Vector3 MoveDirection()
     {

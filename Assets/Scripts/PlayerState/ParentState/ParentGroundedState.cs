@@ -12,6 +12,8 @@ namespace HNS.ParentState.GroundState
         protected Vector2 Input;
         protected bool JumpInput;
         protected bool JumpInputStop;
+        protected bool IsJumping;
+        private bool DashInput;
         public ParentGroundedState(PlayerController playerController, StateMachine stateMachine, PlayerData playerData, string animBoolName) : base(playerController, stateMachine, playerData, animBoolName)
         {
 
@@ -25,6 +27,7 @@ namespace HNS.ParentState.GroundState
         public override void EnterState()
         {
             base.EnterState();
+            _playerController.DashStates.ResetCanDash();
         }
 
         public override void ExitState()
@@ -36,8 +39,14 @@ namespace HNS.ParentState.GroundState
         {
             base.LogicStateUpdate();
             Input = _playerController.PlayerInputs.MovementInput;
-            JumpInput = _playerController.PlayerInputs.JumpInput;
-            JumpInputStop = _playerController.PlayerInputs.JumpInputStop;
+            //JumpInput = _playerController.PlayerInputs.DashInput;
+            JumpInputStop = _playerController.PlayerInputs.DashInputStop;
+            IsJumping = _playerController.PlayerInputs.IsJumping;
+            DashInput = _playerController.PlayerInputs.DashInput;
+            if (DashInput && _playerController.DashStates.CheckerCanDash())
+            {
+                _stateMachine.ChangeState(_playerController.DashStates);
+            }
         }
 
         public override void PhysicsStateUpdate()
@@ -103,11 +112,17 @@ namespace HNS.ParentState.GroundState
         {
             _playerData.currentTargetRotation.y = Target;
             _playerData.dampedTargetRotationPassedTime.y = 0f;
+
         }
         public Vector3 GetTargetRotation(float TargetAngle)
         {
             return Quaternion.Euler(0f, TargetAngle, 0f) * Vector3.forward;
         }
+        bool IsGrounded()
+        {
+            return Physics.CheckSphere(_playerController.GroundCheck.position, .1f, _playerData.GroundLayer);
+        }
+
     }
 }
 
