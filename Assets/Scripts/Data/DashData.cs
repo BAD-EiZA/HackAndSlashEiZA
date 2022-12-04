@@ -11,7 +11,7 @@ public class DashData : ScriptableObject
     [SerializeField] public float TimeConsiderConsecutive { get; private set; } = 1f;
     [SerializeField] public int ConsecutiveDashLimit { get; private set; } = 2;
     [SerializeField] public float DashLimitCooldown { get; private set; } = 1.75f;
-    [SerializeField] public float DashCooldown = 1f;
+    [SerializeField] public float DashCooldown = 0.6f;
     public float GetMovementSpeed()
     {
         return BaseSpeed * SpeedModifier;

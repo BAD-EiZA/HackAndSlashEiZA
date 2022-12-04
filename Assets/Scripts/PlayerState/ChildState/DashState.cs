@@ -31,6 +31,7 @@ public class DashState : ParentGroundedState
     {
         base.EnterState();
         CanDash = false;
+        lastDashTime = Time.time;
         _playerController.PlayerInputs.UseDashInput();
         AddForceOnDash();
         AddForceMovement(dashData.GetMovementSpeed());
