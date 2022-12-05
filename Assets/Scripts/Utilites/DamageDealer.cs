@@ -67,7 +67,7 @@ public class DamageDealer : MonoBehaviour
     }
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy") && canDealDamage)
         {
             Debug.Log("Akfif");
             Enemy.Instance.TakeDamage(weaponDamage);

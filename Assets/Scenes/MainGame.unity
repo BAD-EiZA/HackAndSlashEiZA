@@ -379,6 +379,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1187150154, guid: 1ed2991c371ce134c8c833929dd22354, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2645127521962997644, guid: 1ed2991c371ce134c8c833929dd22354, type: 3}
       propertyPath: attackData
       value: 
@@ -465,7 +469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7155579916075236020, guid: 1ed2991c371ce134c8c833929dd22354, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 7427210668706717499, guid: 1ed2991c371ce134c8c833929dd22354, type: 3}
       propertyPath: m_RootOrder
@@ -901,7 +905,7 @@ GameObject:
   - component: {fileID: 2058857231}
   m_Layer: 7
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -917,9 +921,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.2447705
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.12238529, z: 0}
 --- !u!114 &2058857227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -932,7 +936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 313f88afcb9ce3f4393df8ffb9bafd02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 5
+  Health: 3
 --- !u!23 &2058857228
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1012,5 +1016,5 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 10
   m_CollisionDetection: 0
