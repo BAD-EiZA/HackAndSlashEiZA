@@ -41,7 +41,7 @@ public class AttackState : ParentGroundedState
         Attacktimepassed += Time.time;
         clipLength = _playerController.Anim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
         clipSpeed = _playerController.Anim.GetCurrentAnimatorStateInfo(0).speed;
-        AddForceDash(attackData.GetMovementSpeed());
+        //AddForceDash(attackData.GetMovementSpeed());
         //AddForceOnDash(_playerData.GetMovementSpeed());
         if (Attacktimepassed >= clipLength / clipSpeed && Input == Vector2.zero)
         {

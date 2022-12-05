@@ -74,6 +74,10 @@ namespace HNS.ParentState.GroundState
             Vector3 targerRotation = GetTargetRotation(targetMovementRotation);
             _playerController.RB.AddForce(targerRotation * Speed - _playerController.GetCurrentHorizontalVelocity(), ForceMode.Force);
         }
+        public void DashMovementAdd(float Speed)
+        {
+            _playerController.RB.AddForce(_playerController.MoveDirection() * Speed - _playerController.GetCurrentHorizontalVelocity(), ForceMode.Impulse);
+        }
         public void AddForceDash(float Speed)
         {
             float targetMovementRotation = Rotate(_playerController.MoveDirection());
