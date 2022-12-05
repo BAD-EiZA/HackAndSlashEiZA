@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: DashData
   m_EditorClassIdentifier: 
   BaseSpeed: 5
-  SpeedModifier: 4
+  SpeedModifier: 2
+  DashCooldown: 1

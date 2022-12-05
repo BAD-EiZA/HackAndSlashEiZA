@@ -10,10 +10,13 @@ namespace HNS.ParentState.GroundState
     public class ParentGroundedState : State
     {
         protected Vector2 Input;
-        protected bool JumpInput;
-        protected bool JumpInputStop;
-        protected bool IsJumping;
         private bool DashInput;
+        protected bool AttackInput;
+        protected bool AttackInputStop;
+        public float Attacktimepassed;
+        public float clipLength;
+        public float clipSpeed;
+
         public ParentGroundedState(PlayerController playerController, StateMachine stateMachine, PlayerData playerData, string animBoolName) : base(playerController, stateMachine, playerData, animBoolName)
         {
 
@@ -39,14 +42,20 @@ namespace HNS.ParentState.GroundState
         {
             base.LogicStateUpdate();
             Input = _playerController.PlayerInputs.MovementInput;
-            //JumpInput = _playerController.PlayerInputs.DashInput;
-            JumpInputStop = _playerController.PlayerInputs.DashInputStop;
-            IsJumping = _playerController.PlayerInputs.IsJumping;
             DashInput = _playerController.PlayerInputs.DashInput;
+            AttackInput = _playerController.PlayerInputs.AttackInput;
+            AttackInputStop = _playerController.PlayerInputs.AttackInputStop;
             if (DashInput && _playerController.DashStates.CheckerCanDash())
             {
                 _stateMachine.ChangeState(_playerController.DashStates);
             }
+            if (AttackInput && !AttackInputStop)
+            {
+                _stateMachine.ChangeState(_playerController.AttackStates);
+                Debug.Log("AttackState");
+            }
+
+
         }
 
         public override void PhysicsStateUpdate()

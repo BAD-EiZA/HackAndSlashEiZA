@@ -19,8 +19,16 @@ namespace HNS.Input.System
         {
             get; private set;
         }
+        public bool AttackInput
+        {
+            get; private set;
+        }
+        public bool AttackInputStop
+        {
+            get; private set;
+        }
+        private float attackInputStartTime;
         private float dashInputStartTime;
-        public bool IsJumping = false;
         private float holdTime = 0.2f;
         private void Update()
         {
@@ -30,6 +38,19 @@ namespace HNS.Input.System
         {
             MovementInput = context.ReadValue<Vector2>();
             Debug.Log(MovementInput);
+        }
+        public void OnPrimaryAttack(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                AttackInput = true;
+                AttackInputStop = false;
+                attackInputStartTime = Time.time;
+            }
+            else if (context.canceled)
+            {
+                AttackInputStop = true;
+            }
         }
         public void OnDashInput(InputAction.CallbackContext context)
         {

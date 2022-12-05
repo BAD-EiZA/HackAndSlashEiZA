@@ -27,6 +27,10 @@ public class PlayerController : MonoBehaviour
     {
         get; private set;
     }
+    public AttackState AttackStates
+    {
+        get; private set;
+    }
     public IdleState IdleStates
     {
         get; private set;
@@ -58,6 +62,7 @@ public class PlayerController : MonoBehaviour
         IdleStates = new IdleState(this, StateMachines, playerData, "Idle");
         WalkStates = new WalkState(this, StateMachines, playerData, "Walk");
         DashStates = new DashState(this, StateMachines, playerData, "Dash", dashData);
+        AttackStates = new AttackState(this, StateMachines, playerData, "Attack");
     }
     private void Start()
     {

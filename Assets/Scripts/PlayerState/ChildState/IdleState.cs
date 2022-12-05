@@ -41,7 +41,7 @@ namespace HNS.SubState.IdleState
                 Debug.Log("Walk State");
             }
             
-            
+
         }
 
         public override void PhysicsStateUpdate()

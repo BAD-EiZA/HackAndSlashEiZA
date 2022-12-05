@@ -13,4 +13,11 @@ MonoBehaviour:
   m_Name: PlayerBaseData
   m_EditorClassIdentifier: 
   BaseSpeed: 5
-  SpeedModifier: 1
+  SpeedModifier: 3
+  currentTargetRotation: {x: 0, y: 336.11374, z: 0}
+  timeTargetRotation: {x: 0, y: 0.14, z: 0}
+  dampedTargetRotationCurrentVelocity: {x: 0, y: -180.95073, z: 0}
+  dampedTargetRotationPassedTime: {x: 0, y: 0.02, z: 0}
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 64
