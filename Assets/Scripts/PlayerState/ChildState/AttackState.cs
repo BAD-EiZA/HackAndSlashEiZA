@@ -7,9 +7,10 @@ using UnityEngine;
 
 public class AttackState : ParentGroundedState
 {
-
-    public AttackState(PlayerController playerController, StateMachine stateMachine, PlayerData playerData, string animBoolName) : base(playerController, stateMachine, playerData, animBoolName)
+    protected AttackData attackData;
+    public AttackState(PlayerController playerController, StateMachine stateMachine, PlayerData playerData, string animBoolName, AttackData attackData) : base(playerController, stateMachine, playerData, animBoolName)
     {
+        this.attackData = attackData;
     }
 
     public override void CheckerState()
@@ -24,6 +25,8 @@ public class AttackState : ParentGroundedState
         _playerController.Anim.applyRootMotion = true;
         Attacktimepassed = 0f;
         _playerController.Anim.SetTrigger("Attacking");
+        
+        
     }
 
     public override void ExitState()
@@ -38,7 +41,9 @@ public class AttackState : ParentGroundedState
         Attacktimepassed += Time.time;
         clipLength = _playerController.Anim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
         clipSpeed = _playerController.Anim.GetCurrentAnimatorStateInfo(0).speed;
-        if(Attacktimepassed >= clipLength / clipSpeed && Input == Vector2.zero)
+        AddForceDash(attackData.GetMovementSpeed());
+        //AddForceOnDash(_playerData.GetMovementSpeed());
+        if (Attacktimepassed >= clipLength / clipSpeed && Input == Vector2.zero)
         {
             _stateMachine.ChangeState(_playerController.IdleStates);
         }

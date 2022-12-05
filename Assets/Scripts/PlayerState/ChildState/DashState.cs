@@ -33,7 +33,7 @@ public class DashState : ParentGroundedState
         CanDash = false;
         lastDashTime = Time.time;
         _playerController.PlayerInputs.UseDashInput();
-        AddForceOnDash();
+        AddForceOnDash(dashData.GetMovementSpeed());
         AddForceMovement(dashData.GetMovementSpeed());
         
     }
@@ -60,10 +60,5 @@ public class DashState : ParentGroundedState
     {
         base.PhysicsStateUpdate();
     }
-    public void AddForceOnDash()
-    {
-        Vector3 characterRotationDirection = _playerController.transform.forward;
-        characterRotationDirection.y = 0f;
-        _playerController.RB.velocity = characterRotationDirection * dashData.GetMovementSpeed(); 
-    }
+    
 }

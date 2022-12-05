@@ -74,6 +74,12 @@ namespace HNS.ParentState.GroundState
             Vector3 targerRotation = GetTargetRotation(targetMovementRotation);
             _playerController.RB.AddForce(targerRotation * Speed - _playerController.GetCurrentHorizontalVelocity(), ForceMode.Force);
         }
+        public void AddForceDash(float Speed)
+        {
+            float targetMovementRotation = Rotate(_playerController.MoveDirection());
+            Vector3 targerRotation = GetTargetRotation(targetMovementRotation);
+            _playerController.RB.AddForce(targerRotation * Speed - _playerController.GetCurrentHorizontalVelocity(), ForceMode.Impulse);
+        }
         public void RotateTowardsTargetRotation()
         {
             float currentYAngle = _playerController.RB.rotation.eulerAngles.y;
@@ -131,6 +137,13 @@ namespace HNS.ParentState.GroundState
         {
             return Physics.CheckSphere(_playerController.GroundCheck.position, .1f, _playerData.GroundLayer);
         }
+        public void AddForceOnDash(float Speed)
+        {
+            Vector3 characterRotationDirection = _playerController.transform.forward;
+            characterRotationDirection.y = 0f;
+            _playerController.RB.velocity = characterRotationDirection * Speed;
+        }
+
 
     }
 }

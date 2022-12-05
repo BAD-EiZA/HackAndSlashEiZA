@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
     #endregion
     [SerializeField] private PlayerData playerData;
     [SerializeField] private DashData dashData;
+    [SerializeField] private AttackData attackData;
     [SerializeField] public Transform GroundCheck;
     private void Awake()
     {
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
         IdleStates = new IdleState(this, StateMachines, playerData, "Idle");
         WalkStates = new WalkState(this, StateMachines, playerData, "Walk");
         DashStates = new DashState(this, StateMachines, playerData, "Dash", dashData);
-        AttackStates = new AttackState(this, StateMachines, playerData, "Attack");
+        AttackStates = new AttackState(this, StateMachines, playerData, "Attack", attackData);
     }
     private void Start()
     {
@@ -103,6 +104,14 @@ public class PlayerController : MonoBehaviour
         currentVelocity = RB.velocity;
         currentVelocity.y = 0f;
         return currentVelocity;
+    }
+    public void StartsDealDamage()
+    {
+        DamageDealer.instance.StartDealDamage();
+    }
+    public void EndsDealDamage()
+    {
+        DamageDealer.instance.EndDealDamage();
     }
 
 }
