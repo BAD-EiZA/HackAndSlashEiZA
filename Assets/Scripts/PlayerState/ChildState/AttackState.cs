@@ -38,24 +38,14 @@ public class AttackState : ParentGroundedState
         Attacktimepassed += Time.time;
         clipLength = _playerController.Anim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
         clipSpeed = _playerController.Anim.GetCurrentAnimatorStateInfo(0).speed;
-        if (Attacktimepassed >= clipLength / clipSpeed && AttackInput)
-        {
-            
-            //_stateMachine.ChangeState(_playerController.AttackStates);
-            
-        }
         if(Attacktimepassed >= clipLength / clipSpeed && Input == Vector2.zero)
         {
             _stateMachine.ChangeState(_playerController.IdleStates);
         }
-        //if (Attacktimepassed >= clipLength / clipSpeed && Input == Vector2.zero)
-        //{
-        //    _stateMachine.ChangeState(_playerController.IdleStates);
-        //}
-        //if(Attacktimepassed >= clipLength / clipSpeed && Input != Vector2.zero)
-        //{
-        //    _stateMachine.ChangeState(_playerController.WalkStates);
-        //}
+        if (Attacktimepassed >= clipLength / clipSpeed && Input != Vector2.zero)
+        {
+            _stateMachine.ChangeState(_playerController.WalkStates);
+        }
     }
 
     public override void PhysicsStateUpdate()
