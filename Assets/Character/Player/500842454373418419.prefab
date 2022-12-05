@@ -3422,6 +3422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 5cf51fb7e4484ed4a9b46dcd847b59e8, type: 2}
   dashData: {fileID: 11400000, guid: e85e57b77e0b450418a97e18d00bed0a, type: 2}
+  attackData: {fileID: 0}
   GroundCheck: {fileID: 570536551}
 --- !u!136 &6342169899736625379
 CapsuleCollider:
@@ -4411,6 +4412,14 @@ PrefabInstance:
     - target: {fileID: 3095827080061414111, guid: c9449081fd9acc041ae7f56970c5af60, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6647192951901333292, guid: c9449081fd9acc041ae7f56970c5af60, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6647192951901333292, guid: c9449081fd9acc041ae7f56970c5af60, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9449081fd9acc041ae7f56970c5af60, type: 3}
