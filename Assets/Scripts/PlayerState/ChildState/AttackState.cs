@@ -4,6 +4,7 @@ using HNS.ParentState.GroundState;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class AttackState : ParentGroundedState
 {
@@ -43,14 +44,26 @@ public class AttackState : ParentGroundedState
         clipSpeed = _playerController.Anim.GetCurrentAnimatorStateInfo(0).speed;
         //AddForceDash(attackData.GetMovementSpeed());
         //AddForceOnDash(_playerData.GetMovementSpeed());
-        if (Attacktimepassed >= clipLength / clipSpeed && Input == Vector2.zero)
+        if (!IsInState)
         {
-            _stateMachine.ChangeState(_playerController.IdleStates);
+            if (Attacktimepassed >= clipLength / clipSpeed)
+            {
+                if(Input == Vector2.zero)
+                {
+                    _stateMachine.ChangeState(_playerController.IdleStates);
+                }
+                
+            }
+            if (Attacktimepassed >= clipLength / clipSpeed && Input != Vector2.zero)
+            {
+                _stateMachine.ChangeState(_playerController.WalkStates);
+            }
+            //else if (Attacktimepassed >= clipLength / clipSpeed && DashInput && _playerController.DashStates.CheckerCanDash())
+            //{
+            //    _stateMachine.ChangeState(_playerController.DashStates);
+            //}
         }
-        if (Attacktimepassed >= clipLength / clipSpeed && Input != Vector2.zero)
-        {
-            _stateMachine.ChangeState(_playerController.WalkStates);
-        }
+        
     }
 
     public override void PhysicsStateUpdate()

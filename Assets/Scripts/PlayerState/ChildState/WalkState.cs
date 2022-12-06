@@ -26,10 +26,12 @@ namespace HNS.SubState.WalkState
         public override void EnterState()
         {
             base.EnterState();
+            _playerController.Anim.SetFloat("Speed", 1f);
         }
         public override void ExitState()
         {
             base.ExitState();
+            
         }
         public override void LogicStateUpdate()
         {

@@ -10,7 +10,7 @@ namespace HNS.ParentState.GroundState
     public class ParentGroundedState : State
     {
         protected Vector2 Input;
-        private bool DashInput;
+        protected bool DashInput;
         protected bool AttackInput;
         protected bool AttackInputStop;
         public float Attacktimepassed;
@@ -45,7 +45,8 @@ namespace HNS.ParentState.GroundState
             DashInput = _playerController.PlayerInputs.DashInput;
             AttackInput = _playerController.PlayerInputs.AttackInput;
             AttackInputStop = _playerController.PlayerInputs.AttackInputStop;
-            if (DashInput && _playerController.DashStates.CheckerCanDash())
+           
+            if (DashInput && _playerController.DashStates.CheckerCanDash() && !IsInState)
             {
                 _stateMachine.ChangeState(_playerController.DashStates);
             }

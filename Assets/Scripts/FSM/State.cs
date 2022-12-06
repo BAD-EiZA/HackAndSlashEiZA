@@ -15,6 +15,7 @@ namespace HNS.FSM.StateReferences
 
         protected float _startTime;
         protected string _animBoolName;
+        protected bool IsInState;
 
         public State(PlayerController playerController, StateMachine stateMachine, PlayerData playerData, string animBoolName)
         {
@@ -29,10 +30,12 @@ namespace HNS.FSM.StateReferences
             CheckerState();
             _playerController.Anim.SetBool(_animBoolName, true);
             _startTime = Time.time;
+            IsInState = false;
         }
         public virtual void ExitState()
         {
             _playerController.Anim.SetBool(_animBoolName, false);
+            IsInState = true;
         }
         public virtual void LogicStateUpdate()
         {

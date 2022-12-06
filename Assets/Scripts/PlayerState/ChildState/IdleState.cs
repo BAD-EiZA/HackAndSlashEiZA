@@ -37,7 +37,7 @@ namespace HNS.SubState.IdleState
             if(Input.x != 0 || Input.y != 0)
             {
                 _stateMachine.ChangeState(_playerController.WalkStates);
-                _playerController.Anim.SetFloat("Speed", 1f);
+                //_playerController.Anim.SetFloat("Speed", 0f);
                 Debug.Log("Walk State");
             }
             

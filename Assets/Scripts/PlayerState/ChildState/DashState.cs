@@ -30,13 +30,15 @@ public class DashState : ParentGroundedState
     public override void EnterState()
     {
         base.EnterState();
+        Debug.Log("Dash State");
         CanDash = false;
         lastDashTime = Time.time;
         _playerController.PlayerInputs.UseDashInput();
-        AddForceOnDash(dashData.GetMovementSpeed());
+        //AddForceOnDash(dashData.GetMovementSpeed());
+        _playerController.Anim.SetFloat("Speed", 0f);
         //AddForceMovement(dashData.GetMovementSpeed());
         //DashMovementAdd(dashData.GetMovementSpeed());
-        
+
     }
 
     public override void ExitState()
@@ -54,6 +56,7 @@ public class DashState : ParentGroundedState
         if(Input != Vector2.zero)
         {
             _stateMachine.ChangeState(_playerController.WalkStates);
+            
         }
     }
 

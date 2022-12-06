@@ -113,5 +113,15 @@ public class PlayerController : MonoBehaviour
     {
         DamageDealer.instance.EndDealDamage();
     }
+    public void MovementForce(float Speed)
+    {
+        RB.AddForce(MoveDirection() * Speed - GetCurrentHorizontalVelocity(), ForceMode.Impulse);
+    }
+    public void AddsForceOnDash()
+    {
+        Vector3 characterRotationDirection = transform.forward;
+        characterRotationDirection.y = 0f;
+        RB.velocity = characterRotationDirection * dashData.GetMovementSpeed();
+    }
 
 }

@@ -29,7 +29,7 @@ namespace HNS.Input.System
         }
         private float attackInputStartTime;
         private float dashInputStartTime;
-        private float holdTime = 0.2f;
+        private float holdTime = 0.1f;
         private void Update()
         {
             CheckDashTime(); 
