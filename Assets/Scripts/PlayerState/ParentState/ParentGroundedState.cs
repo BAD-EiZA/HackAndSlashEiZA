@@ -10,12 +10,16 @@ namespace HNS.ParentState.GroundState
     public class ParentGroundedState : State
     {
         protected Vector2 Input;
+        protected bool SpecialAttackInput;
         protected bool DashInput;
         protected bool AttackInput;
         protected bool AttackInputStop;
+        protected bool SpecialAttackInputStop;
         public float Attacktimepassed;
         public float clipLength;
         public float clipSpeed;
+        private float lastSkillTime;
+
 
         public ParentGroundedState(PlayerController playerController, StateMachine stateMachine, PlayerData playerData, string animBoolName) : base(playerController, stateMachine, playerData, animBoolName)
         {
@@ -45,7 +49,9 @@ namespace HNS.ParentState.GroundState
             DashInput = _playerController.PlayerInputs.DashInput;
             AttackInput = _playerController.PlayerInputs.AttackInput;
             AttackInputStop = _playerController.PlayerInputs.AttackInputStop;
-           
+            SpecialAttackInput = _playerController.PlayerInputs.SpecialAttackInput;
+            SpecialAttackInputStop = _playerController.PlayerInputs.SpecialAttackInputStop;
+
             if (DashInput && _playerController.DashStates.CheckerCanDash() && !IsInState)
             {
                 _stateMachine.ChangeState(_playerController.DashStates);
@@ -55,10 +61,17 @@ namespace HNS.ParentState.GroundState
                 _stateMachine.ChangeState(_playerController.AttackStates);
                 Debug.Log("AttackState");
             }
+            if (SpecialAttackInput && CheckerCanSpecialAttack() && !SpecialAttackInputStop)
+            {
+                _stateMachine.ChangeState(_playerController.SpecialAttackStates);
+            }
 
 
         }
-
+        public bool CheckerCanSpecialAttack()
+        {
+            return SpecialAttackInput && _playerController.currentSkillGauge > 0 && Time.time >= lastSkillTime + 1f;
+        }
         public override void PhysicsStateUpdate()
         {
             base.PhysicsStateUpdate();

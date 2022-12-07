@@ -27,6 +27,7 @@ namespace HNS.SubState.WalkState
         {
             base.EnterState();
             _playerController.Anim.SetFloat("Speed", 1f);
+            _playerController.isAnimFinish = false;
         }
         public override void ExitState()
         {

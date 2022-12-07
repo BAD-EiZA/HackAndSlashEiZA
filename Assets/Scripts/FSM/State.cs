@@ -12,6 +12,7 @@ namespace HNS.FSM.StateReferences
         protected PlayerController _playerController;
         protected StateMachine _stateMachine;
         protected PlayerData _playerData;
+        protected Vector2 Input;
 
         protected float _startTime;
         protected string _animBoolName;
@@ -39,7 +40,7 @@ namespace HNS.FSM.StateReferences
         }
         public virtual void LogicStateUpdate()
         {
-
+            Input = _playerController.PlayerInputs.MovementInput;
         }
         public virtual void PhysicsStateUpdate()
         {

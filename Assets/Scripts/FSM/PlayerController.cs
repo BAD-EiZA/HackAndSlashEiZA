@@ -39,6 +39,10 @@ public class PlayerController : MonoBehaviour
     {
         get; private set;
     }
+    public SpecialAttackState SpecialAttackStates
+    {
+        get; private set;
+    }
     public PlayerInputHandler PlayerInputs
     {
         get; private set;
@@ -56,11 +60,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private DashData dashData;
     [SerializeField] private AttackData attackData;
     [SerializeField] public Transform GroundCheck;
+
+    [SerializeField] public float currentSkillGauge;
+    [SerializeField] float startSkillGauge;
+    public bool isAnimFinish = false;
     private void Awake()
     {
         MainCameraTransform = Camera.main.transform;
         StateMachines = new StateMachine();
         IdleStates = new IdleState(this, StateMachines, playerData, "Idle");
+        SpecialAttackStates = new SpecialAttackState(this, StateMachines, playerData, "SpecialAttack");
         WalkStates = new WalkState(this, StateMachines, playerData, "Walk");
         DashStates = new DashState(this, StateMachines, playerData, "Dash", dashData);
         AttackStates = new AttackState(this, StateMachines, playerData, "Attack", attackData);
@@ -72,6 +81,7 @@ public class PlayerController : MonoBehaviour
         RB = GetComponent<Rigidbody>();
         PlayerInputs = GetComponent<PlayerInputHandler>();
         StateMachines.Initialize(IdleStates);
+        currentSkillGauge = startSkillGauge;
     }
     private void Update()
     {
@@ -85,6 +95,16 @@ public class PlayerController : MonoBehaviour
     public void ResetVelocity()
     {
         RB.velocity = Vector3.zero;
+    }
+    public void AnimationFinish()
+    {
+        isAnimFinish = true;
+    }
+    public void SpecialAttackGaugeReduces(float gauge)
+    {
+        currentSkillGauge -= gauge;
+        UIManager.Instance.GaugeSlider.value -= currentSkillGauge;
+
     }
     public IEnumerator DelayDash()
     {

@@ -27,6 +27,15 @@ namespace HNS.Input.System
         {
             get; private set;
         }
+        public bool SpecialAttackInput
+        {
+            get; private set;
+        }
+        public bool SpecialAttackInputStop
+        {
+            get; private set;
+        }
+        private float specialAttackInputStartTime;
         private float attackInputStartTime;
         private float dashInputStartTime;
         private float holdTime = 0.1f;
@@ -67,6 +76,20 @@ namespace HNS.Input.System
             }
             
         }
+        public void OnSpecialAttack(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                SpecialAttackInput = true;
+                SpecialAttackInputStop = false;
+                specialAttackInputStartTime = Time.time;
+            }
+            else if (context.canceled)
+            {
+                SpecialAttackInputStop = true;
+            }
+        }
+        public void UseSpecialAttack() => SpecialAttackInput = false;
         public void UseDashInput() => DashInput = false;
         private void CheckDashTime()
         {
