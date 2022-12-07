@@ -22,6 +22,7 @@ namespace HNS.SubState.IdleState
         public override void EnterState()
         {
             base.EnterState();
+            _playerController.isAnimFinish = false;
             //_playerData.SetSpeedModifier(0);
             //_playerController.ResetVelocity();
         }
